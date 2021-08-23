@@ -178,8 +178,10 @@ void makeHole(int size)
   }
   Serial.println("digging a hole for size: " + String(size));
   setArm('l');
+  delay(500);
   wheelForward(size);
   setArm('r');
+  delay(500);
   wheelForward(48 - size - 1);
 
   int x = 0;
