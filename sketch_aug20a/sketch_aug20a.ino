@@ -31,7 +31,7 @@ void setup()
 
   Serial.println("\n\nKnitting Machine Ready:");
   Serial.println("\n2021 - Pengan Zhou");
-  Serial.println("\nArm control: L to loose, R to tight, Z for repair");
+  Serial.println("\nArm control: L to loose, R to tight, Z for repair, M move to specific angle - for debug");
   Serial.println("\nWheel control: [n]S forward n teeth, [n]B to backward n teeth, [n]C to rotate n circle");
   Serial.println("\nAuto hole: [n]H to digging a hole with n teeth width, and automatically sewing");
 
@@ -70,6 +70,12 @@ void loop()
     if (inChar == 'h')
     {
       makeHole(commandNumber);
+    }
+    if (inChar == 'm')
+    {
+      armStatus = 'r';
+      Serial.println("\nmove arm to " + digitBuffer);
+      armServo.write(digitBuffer.toInt());
     }
     if (isDigit(inChar))
     {
