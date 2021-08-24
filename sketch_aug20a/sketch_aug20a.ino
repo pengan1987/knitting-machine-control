@@ -7,7 +7,7 @@ int armPin = 9;
 char armStatus;
 
 Servo armServo;
-int leftEnd = 170;
+int leftEnd = 160;
 int rightEnd = 130;
 String digitBuffer = "";
 

@@ -24,3 +24,16 @@ All command should be lower case
 Example:  
 5s = forward 5 teeth  
 5c = rotate 5 circle
+
+## Punched Card Data Translator
+The cardwatcher.py program will translate the punched card data to knitting machine actions. The punched holes are grouped 3 as a group.
+- The first option is number of circles lead-in and lead-out (3 circles minimum)
+- The second option is the size (number of 1-5 teeth) of hole
+- The third option is the offset of next hole (5 teeth as a step)
+
+For example, a 3 questions answer "ABC" will translated as:  
+(A=1)+2=3 circles lead-in and lead-out  
+(B=2) teeth hole  
+(C=3)*5=15 teeth offset after hole  
+The command will be  
+3c 2h 15s 3c
