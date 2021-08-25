@@ -1,8 +1,12 @@
 
+from os import write
 import time
 import json
+import serial
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
+
+arduinoPort = serial.Serial("COM7", baudrate=9600, timeout=3.0)
 
 
 class MyHandler(FileSystemEventHandler):
@@ -14,10 +18,8 @@ class MyHandler(FileSystemEventHandler):
                 print(data)
                 commands = translateJson(data)
                 print(commands)
-                sendToSerial(commands)
+                sendCommandSeq(commands)
 
-def sendToSerial(commands):
-    print("not working now")
 
 def translateJson(data):
     blankCounter = 0
@@ -51,13 +53,27 @@ def translateJson(data):
         return result
 
 
+def sendCommandSeq(commands):
+    for command in commands:
+        arduinoPort.write(command.encode())
+        rcv = ""
+        while not rcv == ">":
+            rcv = arduinoPort.read(1).decode('ascii', 'ignore')
+
+            print(rcv, end="")
+
+
 if __name__ == "__main__":
+    print("set up Arduino")
+    sendCommandSeq(["\n\n", "r"])
+
     event_handler = MyHandler()
     observer = Observer()
     observer.schedule(
         event_handler, path='C:\Projects\OMRChecker\outputs\MySample\Results', recursive=False)
     observer.start()
 
+    print("Start watching JSON files")
     try:
         while True:
             time.sleep(5)
