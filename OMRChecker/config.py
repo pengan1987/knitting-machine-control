@@ -15,7 +15,7 @@ windowWidth = 1280
 windowHeight = 720
 
 saveMarked = 0
-saveCropped = 1
+saveCropped = 0
 showimglvl = 0
 saveimglvl = 0
 PRELIM_CHECKS = 0

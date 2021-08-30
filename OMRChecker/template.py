@@ -61,6 +61,10 @@ qtype_data = {
         'vals': range(11),
         'orient': 'V'
     },
+    'QTYPE_INT_12H': {
+        'vals': range(12),
+        'orient': 'H'
+    },
     'QTYPE_INT4': {
         'vals': [1,2,3,0],
         'orient': 'V'
